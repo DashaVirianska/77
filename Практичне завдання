@@ -1,0 +1,43 @@
+
+#include <stdio.h>
+
+#include <stdio.h>
+#include <math.h>
+
+// Функція для обчислення кількості точок перетину кола
+int calculateIntersectionPoints(int x1, int y1, int r1, int x2, int y2, int r2) {
+    // Обчислюємо відстань між центрами кола
+    double distance = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+    
+    // Перевіряємо випадки, коли кола не перетинаються
+    if (distance > r1 + r2) {
+        return 0; // Кола не перетинаються, кількість точок перетину = 0
+    } else if (distance < fabs(r1 - r2)) {
+        return 0; // Одне коло міститься всередині іншого, кількість точок перетину = 0
+    } else if (distance == 0 && r1 == r2) {
+        return -1; // Кола співпадають, точок перетину безкінечно багато
+    } else {
+        return 2; // Кола перетинаються в двох точках
+    }
+}
+
+int main() {
+    int x1, y1, r1, x2, y2, r2;
+    int result;
+
+    printf("Введіть координати центрів та радіуси двох кола (x1 y1 r1 x2 y2 r2): ");
+    scanf("%d %d %d %d %d %d", &x1, &y1, &r1, &x2, &y2, &r2);
+
+    // Обчислюємо кількість точок перетину кола
+    result = calculateIntersectionPoints(x1, y1, r1, x2, y2, r2);
+
+    // Виводимо результат
+    if (result == -1) {
+        printf("Кількість точок перетину: Безкінечно багато\n");
+    } else {
+        printf("Кількість точок перетину: %d\n", result);
+    }
+
+    return 0;
+}
+
